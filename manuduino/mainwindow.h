@@ -14,6 +14,8 @@ namespace Ui {
     struct MainWindow;
 }
 
+class ServerConfigurationDialog;
+
 struct MainWindow : public QMainWindow {
     Q_OBJECT
 
@@ -31,6 +33,7 @@ private:
 
     Ui::MainWindow *ui;
     QWidget *mainWidget, *board;
+    ServerConfigurationDialog *configurationDialog;
 
     QVBoxLayout mainLayout;
     QHBoxLayout buttonLayout;

@@ -1,3 +1,5 @@
+#include <QAction>
+#include "ServerConfigurationDialog.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -53,6 +55,10 @@ MainWindow::MainWindow(QWidget *parent) :
     mainWidget = new QWidget(this);
     mainWidget->setLayout(&mainLayout);
     setCentralWidget(mainWidget);
+
+    // Initialize other dialogs may be invoked by main window
+    configurationDialog = new ServerConfigurationDialog(this);
+    connect(ui->actionServer_Configuration_S, SIGNAL(triggered(bool)), configurationDialog, SLOT(exec()));
 }
 
 MainWindow::~MainWindow()

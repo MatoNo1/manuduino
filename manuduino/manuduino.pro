@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     entity.cpp \
     arrow.cpp \
     emptyentity.cpp \
-    boardgrid.cpp
+    boardgrid.cpp \
+    ServerConfigurationDialog.cpp
 
 HEADERS  += mainwindow.h \
     base.h \
@@ -30,9 +31,11 @@ HEADERS  += mainwindow.h \
     arrow.h \
     emptyentity.h \
     boardgrid.h \
-    operation.h
+    operation.h \
+    ServerConfigurationDialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    ServerConfigurationDialog.ui
 
 RESOURCES += \
     image/image.qrc
