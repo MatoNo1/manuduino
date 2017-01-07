@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Arrow_Down.jpeg</file>
+        <file>Arrow_Left.jpeg</file>
+        <file>Arrow_Right.jpeg</file>
+        <file>Arrow_Up.jpeg</file>
+        <file>BoardGrid.jpeg</file>
+        <file>EmptyBoard_Central.jpeg</file>
+        <file>EmptyBoard_D.jpeg</file>
+        <file>EmptyBoard_DL.jpeg</file>
+        <file>EmptyBoard_DR.jpeg</file>
+        <file>EmptyBoard_L.jpeg</file>
+        <file>EmptyBoard_R.jpeg</file>
+        <file>EmptyBoard_U.jpeg</file>
+        <file>EmptyBoard_UL.jpeg</file>
+        <file>EmptyBoard_UR.jpeg</file>
+    </qresource>
+</RCC>
