@@ -25,3 +25,12 @@ void ManuduinoCompiler::compile(QTextStream &outputStream)
     outputStream << "fill(255, 0, 0);\n";
     outputStream << "rect(50, 50, 200, 200);\n";
 }
+
+void ManuduinoCompiler::compileText(QTextStream &outputStream, const QString& text)
+{
+    outputStream << "fullScreen();\n";
+    outputStream << "background(255);\n";
+    outputStream << "textSize(60);\n";
+    outputStream << "fill(0);\n";
+    outputStream << "text(\"" + text + "\", 100, 100);";
+}

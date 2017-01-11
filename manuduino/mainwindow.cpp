@@ -106,7 +106,7 @@ void MainWindow::onDeployAction()
     auto compiler = ManuduinoCompiler::getInstance();
     QString s;
     QTextStream stream(&s);
-    compiler->compile(stream);
+    compiler->compileText(stream, textArea->toPlainText());
     auto remoteManager = RemoteManager::getInstance();
     remoteManager->uploadCode("demo01", s);
 }
