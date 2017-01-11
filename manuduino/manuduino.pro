@@ -20,7 +20,9 @@ SOURCES += main.cpp\
     arrow.cpp \
     emptyentity.cpp \
     boardgrid.cpp \
-    ServerConfigurationDialog.cpp
+    ServerConfigurationDialog.cpp \
+    ManuduinoCompiler.cpp \
+    RemoteManager.cpp
 
 HEADERS  += mainwindow.h \
     base.h \
@@ -32,7 +34,9 @@ HEADERS  += mainwindow.h \
     emptyentity.h \
     boardgrid.h \
     operation.h \
-    ServerConfigurationDialog.h
+    ServerConfigurationDialog.h \
+    ManuduinoCompiler.h \
+    RemoteManager.h
 
 FORMS    += mainwindow.ui \
     ServerConfigurationDialog.ui

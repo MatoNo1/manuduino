@@ -4,19 +4,19 @@
 #include <QDialog>
 
 namespace Ui {
-class ServerConfigurationDialog;
+    class ServerConfigurationDialog;
 }
 
 class ServerConfigurationDialog : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit ServerConfigurationDialog(QWidget *parent = 0);
-  ~ServerConfigurationDialog();
+    explicit ServerConfigurationDialog(QWidget *parent = 0);
+    ~ServerConfigurationDialog();
 
 private:
-  Ui::ServerConfigurationDialog *ui;
+    Ui::ServerConfigurationDialog *ui;
 };
 
 #endif // SERVERCONFIGURATIONDIALOG_H

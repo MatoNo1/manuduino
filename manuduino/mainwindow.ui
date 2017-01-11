@@ -36,7 +36,8 @@
      <string>Deploy(&amp;D)</string>
     </property>
     <addaction name="actionServer_Configuration_S"/>
-    <addaction name="actionDeploy_E"/>
+    <addaction name="actionDeploy"/>
+    <addaction name="actionExecute"/>
    </widget>
    <widget class="QMenu" name="menuHelp_H">
     <property name="title">
@@ -58,7 +59,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOpen">
    <property name="text">
-    <string>Open</string>
+    <string>&amp;Open</string>
    </property>
   </action>
   <action name="actionCompile">
@@ -71,9 +72,14 @@
     <string>Server Configuration(&amp;S)</string>
    </property>
   </action>
-  <action name="actionDeploy_E">
+  <action name="actionDeploy">
    <property name="text">
     <string>Deploy(&amp;E)</string>
+   </property>
+  </action>
+  <action name="actionExecute">
+   <property name="text">
+    <string>Execute(&amp;X)</string>
    </property>
   </action>
  </widget>

@@ -49,6 +49,8 @@ public slots:
     void setTextMode();
     void setManuMode();
     void allClear();
+    void onDeployAction();
+    void onExecuteAction();
 };
 
 #endif // MAINWINDOW_H

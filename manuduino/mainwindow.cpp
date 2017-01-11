@@ -1,4 +1,9 @@
 #include <QAction>
+#include <QMessageBox>
+#include <QProcess>
+#include <QTextStream>
+#include "ManuduinoCompiler.h"
+#include "RemoteManager.h"
 #include "ServerConfigurationDialog.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -59,6 +64,8 @@ MainWindow::MainWindow(QWidget *parent) :
     // Initialize other dialogs may be invoked by main window
     configurationDialog = new ServerConfigurationDialog(this);
     connect(ui->actionServer_Configuration_S, SIGNAL(triggered(bool)), configurationDialog, SLOT(exec()));
+    connect(ui->actionDeploy, SIGNAL(triggered(bool)), this, SLOT(onDeployAction()));
+    connect(ui->actionExecute, SIGNAL(triggered(bool)), this, SLOT(onExecuteAction()));
 }
 
 MainWindow::~MainWindow()
@@ -92,4 +99,20 @@ void MainWindow::allClear()
         for (int i=0; i<BOARD_ROW; ++i)
             for (int j=0; j<BOARD_COL; ++j)
                 grid[i][j].allClear();
+}
+
+void MainWindow::onDeployAction()
+{
+    auto compiler = ManuduinoCompiler::getInstance();
+    QString s;
+    QTextStream stream(&s);
+    compiler->compile(stream);
+    auto remoteManager = RemoteManager::getInstance();
+    remoteManager->uploadCode("demo01", s);
+}
+
+void MainWindow::onExecuteAction()
+{
+    auto remoteManager = RemoteManager::getInstance();
+    remoteManager->executeCode("demo01");
 }

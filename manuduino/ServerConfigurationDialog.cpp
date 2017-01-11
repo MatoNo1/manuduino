@@ -5,11 +5,10 @@ ServerConfigurationDialog::ServerConfigurationDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ServerConfigurationDialog)
 {
-
-  ui->setupUi(this);
+    ui->setupUi(this);
 }
 
 ServerConfigurationDialog::~ServerConfigurationDialog()
 {
-  delete ui;
+    delete ui;
 }
