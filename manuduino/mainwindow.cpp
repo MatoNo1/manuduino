@@ -324,7 +324,6 @@ void MainWindow::activateHandler(operationType type)
 
 void MainWindow::onDeployAction()
 {
-    auto compiler = ManuduinoCompiler::getInstance();
     QString s;
     QTextStream stream(&s);
     compiler->compileText(stream, textArea->toPlainText());

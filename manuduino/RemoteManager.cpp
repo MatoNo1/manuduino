@@ -18,8 +18,8 @@ void RemoteManager::uploadCode(const QString &codeName, const QString &codeConte
     auto environment = QProcessEnvironment::systemEnvironment();
     environment.insert("SSH_ASKPASS", "ksshaskpass");
     process.setEnvironment(environment.toStringList());
-    QString command1 = "ssh alarm@183.172.217.2 mkdir -p /home/alarm/" + codeName;
-    QString command2 = "scp " + localFileName + " alarm@183.172.217.2:" + remoteFileName;
+    QString command1 = "ssh alarm@183.172.217.203 mkdir -p /home/alarm/" + codeName;
+    QString command2 = "scp " + localFileName + " alarm@183.172.217.203:" + remoteFileName;
     process.start("setsid sh -c \"" + command1 + " && " + command2 + "\"");
     connect(&process, SIGNAL(finished(int)), this, SLOT(onProcessFinished(int)));
 }
@@ -31,7 +31,7 @@ void RemoteManager::executeCode(const QString &codeName)
     auto environment = QProcessEnvironment::systemEnvironment();
     environment.insert("SSH_ASKPASS", "ksshaskpass");
     process.setEnvironment(environment.toStringList());
-    process.start("setsid ssh alarm@183.172.217.2 DISPLAY=:0.0 screen -d -m "
+    process.start("setsid ssh alarm@183.172.217.203 DISPLAY=:0.0 screen -d -m "
                   "/home/alarm/processing-3.2.3/processing-java "
                   "--sketch=/home/alarm/" + codeName + " --run");
     connect(&process, SIGNAL(finished(int)), this, SLOT(onProcessFinished(int)));

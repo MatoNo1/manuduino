@@ -3,6 +3,8 @@
 
 #include "boardgrid.h"
 
+class QTextStream;
+
 struct Compiler {
 protected:
     static const int ROW = MANU_BOARD_ROW;
@@ -15,6 +17,8 @@ protected:
 public:
     Compiler(BoardGrid* allGrid[][COL], Pos _startPos, direct _startDir);
     ~Compiler();
+    void compile(QTextStream &outputStream);
+    void compileText(QTextStream &outputStream, const QString& text);
 };
 
 #endif // COMPILER_H

@@ -21,7 +21,6 @@ SOURCES += main.cpp\
     emptyentity.cpp \
     boardgrid.cpp \
     ServerConfigurationDialog.cpp \
-    ManuduinoCompiler.cpp \
     RemoteManager.cpp \
     selectordialog.cpp \
     operationentity.cpp \
@@ -42,7 +41,6 @@ HEADERS  += mainwindow.h \
     emptyentity.h \
     boardgrid.h \
     ServerConfigurationDialog.h \
-    ManuduinoCompiler.h \
     RemoteManager.h \
     ServerConfigurationDialog.h \
     selectordialog.h \
