@@ -22,7 +22,7 @@ SOURCES += main.cpp\
     boardgrid.cpp \
     ServerConfigurationDialog.cpp \
     ManuduinoCompiler.cpp \
-    RemoteManager.cpp
+    RemoteManager.cpp \
     selectordialog.cpp \
     operationentity.cpp \
     boolcontrollerdialog.cpp \
@@ -43,7 +43,7 @@ HEADERS  += mainwindow.h \
     boardgrid.h \
     ServerConfigurationDialog.h \
     ManuduinoCompiler.h \
-    RemoteManager.h
+    RemoteManager.h \
     ServerConfigurationDialog.h \
     selectordialog.h \
     operationentity.h \
