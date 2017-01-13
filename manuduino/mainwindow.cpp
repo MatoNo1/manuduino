@@ -2,7 +2,6 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QTextStream>
-//#include "ManuduinoCompiler.h"
 #include "RemoteManager.h"
 //#include <QDebug>
 #include <QCursor>
@@ -326,7 +325,10 @@ void MainWindow::onDeployAction()
 {
     QString s;
     QTextStream stream(&s);
-    compiler->compileText(stream, textArea->toPlainText());
+    if(mode == TEXT_MODE)
+        compiler->compileText(stream, textArea->toPlainText());
+    else
+        compiler->compileManufacture(stream);
     auto remoteManager = RemoteManager::getInstance();
     remoteManager->uploadCode("demo01", s);
 }
