@@ -55,10 +55,17 @@ IntControllerDialog::IntControllerDialog(QWidget *parent, int _selectedIntVar, i
         QString buttonName;
         if (i < 10)
             buttonName = (char) (i + 48);
-        else {
+        else if (i < 16) {
             buttonName = "1";
             buttonName += (char) (i + 38);
-        }
+        } else if (i == 16)
+            buttonName = "i";
+        else if (i == 17)
+            buttonName = "j";
+        else if (i == 18)
+            buttonName = "k";
+        else
+            buttonName = "";
 
         valButtons[i].setText(buttonName);
         valButtonGroup.addButton(&(valButtons[i]), i);
@@ -85,12 +92,50 @@ IntControllerDialog::IntControllerDialog(QWidget *parent, int _selectedIntVar, i
             valButtons[0].setCheckable(1); valButtons[1].setCheckable(1);
         }
     }
+
+    switch (_selectedIntVar) {
+        case 0: {
+            valButtons[16].setCheckable(_selectedOperator == 3);
+            valButtons[17].setCheckable(1);
+            valButtons[18].setCheckable(1);
+            break;
+        }
+        case 1: {
+            valButtons[16].setCheckable(1);
+            valButtons[17].setCheckable(_selectedOperator == 3);
+            valButtons[18].setCheckable(1);
+            break;
+        }
+        case 2: {
+            valButtons[16].setCheckable(1);
+            valButtons[17].setCheckable(1);
+            valButtons[18].setCheckable(_selectedOperator == 3);
+            break;
+        }
+        default: {
+            valButtons[16].setCheckable(1);
+            valButtons[17].setCheckable(1);
+            valButtons[18].setCheckable(1);
+            break;
+        }
+    }
+
     connect(&operatorButtons[0], SIGNAL(clicked()), this, SLOT(setValRange0ToF()));
     connect(&operatorButtons[1], SIGNAL(clicked()), this, SLOT(setValRange1ToF()));
     connect(&operatorButtons[2], SIGNAL(clicked()), this, SLOT(setValRange1ToF()));
     connect(&operatorButtons[3], SIGNAL(clicked()), this, SLOT(setValRange2ToF()));
     connect(&operatorButtons[4], SIGNAL(clicked()), this, SLOT(setValRange2ToF()));
     connect(&operatorButtons[5], SIGNAL(clicked()), this, SLOT(setValRange2ToF()));
+
+    connect(&intVarButtons[0], SIGNAL(clicked()), this, SLOT(setValIJKCheckable()));
+    connect(&intVarButtons[1], SIGNAL(clicked()), this, SLOT(setValIJKCheckable()));
+    connect(&intVarButtons[2], SIGNAL(clicked()), this, SLOT(setValIJKCheckable()));
+    connect(&operatorButtons[0], SIGNAL(clicked()), this, SLOT(setValIJKCheckable()));
+    connect(&operatorButtons[1], SIGNAL(clicked()), this, SLOT(setValIJKCheckable()));
+    connect(&operatorButtons[2], SIGNAL(clicked()), this, SLOT(setValIJKCheckable()));
+    connect(&operatorButtons[3], SIGNAL(clicked()), this, SLOT(setValIJKCheckable()));
+    connect(&operatorButtons[4], SIGNAL(clicked()), this, SLOT(setValIJKCheckable()));
+    connect(&operatorButtons[5], SIGNAL(clicked()), this, SLOT(setValIJKCheckable()));
 
     ok.setText("OK");
     cancel.setText("Cancel");
@@ -146,6 +191,39 @@ void IntControllerDialog::setValRange1ToF()
 void IntControllerDialog::setValRange2ToF()
 {
     valButtons[0].setCheckable(0); valButtons[1].setCheckable(0);
+}
+
+void IntControllerDialog::setValIJKCheckable()
+{
+    int tmpIntVar = intVarButtonGroup.checkedId();
+    int tmpOperator = operatorButtonGroup.checkedId();
+
+    switch (tmpIntVar) {
+        case 0: {
+            valButtons[16].setCheckable(tmpOperator == 3);
+            valButtons[17].setCheckable(1);
+            valButtons[18].setCheckable(1);
+            break;
+        }
+        case 1: {
+            valButtons[16].setCheckable(1);
+            valButtons[17].setCheckable(tmpOperator == 3);
+            valButtons[18].setCheckable(1);
+            break;
+        }
+        case 2: {
+            valButtons[16].setCheckable(1);
+            valButtons[17].setCheckable(1);
+            valButtons[18].setCheckable(tmpOperator == 3);
+            break;
+        }
+        default: {
+            valButtons[16].setCheckable(1);
+            valButtons[17].setCheckable(1);
+            valButtons[18].setCheckable(1);
+            break;
+        }
+    }
 }
 
 void IntControllerDialog::okClicked()

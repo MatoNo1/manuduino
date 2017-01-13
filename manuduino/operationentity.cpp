@@ -167,8 +167,14 @@ void OperationEntity::mouseDoubleClickEvent(QMouseEvent *ev)
                     _pixPath += (char) (intControllerOperator + 48);
                     if (intControllerVal < 10)
                         _pixPath += (char) (intControllerVal + 48);
-                    else
+                    else if (intControllerVal < 16)
                         _pixPath += (char) (intControllerVal + 55);
+                    else if (intControllerVal == 16)
+                        _pixPath += "I";
+                    else if (intControllerVal == 17)
+                        _pixPath += "J";
+                    else if (intControllerVal == 18)
+                        _pixPath += "K";
                     _pixPath += ".jpeg";
                     setPixPath(_pixPath);
                 }

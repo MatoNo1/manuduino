@@ -2,7 +2,7 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QTextStream>
-#include "ManuduinoCompiler.h"
+//#include "ManuduinoCompiler.h"
 #include "RemoteManager.h"
 //#include <QDebug>
 #include <QCursor>

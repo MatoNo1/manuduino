@@ -45,6 +45,7 @@ public slots:
     void setValRange0ToF();
     void setValRange1ToF();
     void setValRange2ToF();
+    void setValIJKCheckable();
     void okClicked();
     void cancelClicked();
 };
