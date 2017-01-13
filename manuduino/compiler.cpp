@@ -55,6 +55,42 @@ void Compiler::compileCell(QTextStream &outputStream, int r, int c)
     {
         case NO_CENTRAL_ENTITY:
             return;
+        case SELECTOR:
+            outputStream << "if(__booleanArray[" << grid[r][c]->getCentralArg(0) << "]) { \n";
+            switch(grid[r][c]->getCentralArg(1))
+            {
+            case 0:
+                outputStream << "__rSpeed = 0;__cSpeed = -1;\n";
+                break;
+            case 1:
+                outputStream << "__rSpeed = -1;__cSpeed = 0;\n";
+                break;
+            case 2:
+                outputStream << "__rSpeed = 0;__cSpeed = 1;\n";
+                break;
+            case 3:
+                outputStream << "__rSpeed = 1;__cSpeed = 0;\n";
+                break;
+            }
+            outputStream << "}\n";
+            outputStream << "else {\n";
+            switch(grid[r][c]->getCentralArg(1))
+            {
+            case 0:
+                outputStream << "__rSpeed = 0;__cSpeed = 1;\n";
+                break;
+            case 1:
+                outputStream << "__rSpeed = 1;__cSpeed = 0;\n";
+                break;
+            case 2:
+                outputStream << "__rSpeed = 0;__cSpeed = -1;\n";
+                break;
+            case 3:
+                outputStream << "__rSpeed = -1;__cSpeed = 0;\n";
+                break;
+            }
+            outputStream << "}\n";
+            break;
         case INT_CONTROLLER:
             outputStream << idx2variable(grid[r][c]->getCentralArg(0)) << " ";
             outputStream << idx2intOp(grid[r][c]->getCentralArg(1)) << " ";
@@ -134,6 +170,7 @@ void Compiler::compileManufacture(QTextStream &outputStream)
     outputStream << "int __cSpeed = 0;\n";
     outputStream << "int[][] __rMoveArray = new int[" + QString::number(ROW) + "][" + QString::number(COL) + "];\n";
     outputStream << "int[][] __cMoveArray = new int[" + QString::number(ROW) + "][" + QString::number(COL) + "];\n";
+    outputStream << "boolean[][] __isSelectorArray = new boolean[" + QString::number(ROW) + "][" + QString::number(COL) + "];\n";
     outputStream << "void setup()\n";
     outputStream << "{\n";
     outputStream << "fullScreen();\n";
@@ -149,6 +186,8 @@ void Compiler::compileManufacture(QTextStream &outputStream)
             outputStream << (grid[i][j]->getLRState() == NO_LR ? 0 : (grid[i][j]->getLRState() == IS_LEFT ? -1 : 1)) << ";\n";
             outputStream << "__rMoveArray[" + QString::number(i) + "][" + QString::number(j) + "] = ";
             outputStream << (grid[i][j]->getUDState() == NO_UD ? 0 : (grid[i][j]->getUDState() == IS_UP ? -1 : 1)) << ";\n";
+            outputStream << "__isSelectorArray[" + QString::number(i) + "][" + QString::number(j) + "] = ";
+            outputStream << (grid[i][j]->getCentralState() == SELECTOR ? "true" : "false") << ";\n";
         }
     }
     outputStream << "}\n";
@@ -188,7 +227,15 @@ void Compiler::compileManufacture(QTextStream &outputStream)
     }
     outputStream << "if(__cMoveArray[__currentRow][__currentCol] == 0 && __rMoveArray[__currentRow][__currentCol] == 0)\n"
                     "{\n"
-                    "    __programTerminated = true;\n"
+                    "    if(__isSelectorArray[__currentRow][__currentCol])"
+                    "    {"
+                    "        __currentRow += __rSpeed;"
+                    "        __currentCol += __cSpeed;"
+                    "    }"
+                    "    else"
+                    "    {"
+                    "        __programTerminated = true;\n"
+                    "    }"
                     "}\n"
                     "else if (__cMoveArray[__currentRow][__currentCol] == 0)"
                     "{\n"
