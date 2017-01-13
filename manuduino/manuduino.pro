@@ -23,6 +23,14 @@ SOURCES += main.cpp\
     ServerConfigurationDialog.cpp \
     ManuduinoCompiler.cpp \
     RemoteManager.cpp
+    selectordialog.cpp \
+    operationentity.cpp \
+    boolcontrollerdialog.cpp \
+    intcontrollerdialog.cpp \
+    comparatordialog.cpp \
+    outputdialog.cpp \
+    bitsetterdialog.cpp \
+    compiler.cpp
 
 HEADERS  += mainwindow.h \
     base.h \
@@ -33,10 +41,18 @@ HEADERS  += mainwindow.h \
     arrow.h \
     emptyentity.h \
     boardgrid.h \
-    operation.h \
     ServerConfigurationDialog.h \
     ManuduinoCompiler.h \
     RemoteManager.h
+    ServerConfigurationDialog.h \
+    selectordialog.h \
+    operationentity.h \
+    boolcontrollerdialog.h \
+    intcontrollerdialog.h \
+    comparatordialog.h \
+    outputdialog.h \
+    bitsetterdialog.h \
+    compiler.h
 
 FORMS    += mainwindow.ui \
     ServerConfigurationDialog.ui

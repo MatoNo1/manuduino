@@ -10,8 +10,8 @@ struct TextEditor : public QTextEdit {
     Q_OBJECT
 
 public:
-    TextEditor (QWidget* parent, QString text);
-    ~TextEditor ();
+    TextEditor(QWidget* parent, QString text);
+    ~TextEditor();
     void clear();
 
 private:

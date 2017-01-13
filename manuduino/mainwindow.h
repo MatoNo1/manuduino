@@ -7,8 +7,11 @@
 #include <QGridLayout>
 #include <QStackedLayout>
 #include <QPushButton>
+#include "base.h"
 #include "texteditor.h"
 #include "boardgrid.h"
+#include "operationentity.h"
+#include "compiler.h"
 
 namespace Ui {
     struct MainWindow;
@@ -23,6 +26,10 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+protected:
+    void mouseReleaseEvent(QMouseEvent* ev);
+    void mouseMoveEvent(QMouseEvent* ev);
+
 private:
     static const int TEXT_MODE_HEIGHT = MAIN_WINDOW_TEXT_MODE_HEIGHT;
     static const int TEXT_MODE_WIDTH = MAIN_WINDOW_TEXT_MODE_WIDTH;
@@ -32,18 +39,29 @@ private:
     static const int BOARD_COL = MANU_BOARD_COL;
 
     Ui::MainWindow *ui;
-    QWidget *mainWidget, *board;
+    QWidget *mainWidget, *board, *operationAndBoard;
     ServerConfigurationDialog *configurationDialog;
+    OperationEntity *arrowUpOperation, *arrowRightOperation, *arrowDownOperation, *arrowLeftOperation;
+    OperationEntity *selectorOperation;
+    OperationEntity *boolControllerOperation;
+    OperationEntity *intControllerOperation;
+    OperationEntity *comparatorOperation;
+    OperationEntity *bitSetterOperation;
+    OperationEntity *outputOperation;
+    OperationEntity *clearOperation;
 
-    QVBoxLayout mainLayout;
-    QHBoxLayout buttonLayout;
+    QVBoxLayout mainLayout, operationAndBoardLayout;
+    QHBoxLayout buttonLayout, operationLayout;
     QGridLayout boardLayout;
     QStackedLayout mainAreaLayout;
     QPushButton setTextModeButton, setManuModeButton, clearButton;
     TextEditor *textArea;
-    BoardGrid grid[BOARD_ROW][BOARD_COL];
+    BoardGrid *grid[BOARD_ROW][BOARD_COL];
+
+    Compiler *compiler;
 
     int mode;
+    operationType activatedOperation;
 
 public slots:
     void setTextMode();
@@ -51,6 +69,7 @@ public slots:
     void allClear();
     void onDeployAction();
     void onExecuteAction();
+    void activateHandler(operationType type);
 };
 
 #endif // MAINWINDOW_H

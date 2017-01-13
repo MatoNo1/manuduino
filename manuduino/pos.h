@@ -5,8 +5,8 @@ struct Pos {
 public:
     int x, y;
 
-    Pos (int _x=-1, int _y=-1);
-    Pos (const Pos& _p) ;
+    Pos(int _x=-1, int _y=-1);
+    Pos(const Pos& _p) ;
 
     bool operator== (Pos _p);
     bool operator!= (Pos _p);

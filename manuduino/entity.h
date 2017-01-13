@@ -9,11 +9,12 @@
 
 struct Entity : public QWidget {
 public:
-    Entity (QWidget* parent = 0, QString _pixPath = "");
-    Entity (const Entity& _e);
-    ~Entity ();
+    Entity(QWidget* parent = 0, QString _pixPath = "");
+    Entity(const Entity& _e);
+    ~Entity();
     void operator= (const Entity& _e);
     void setPixPath(QString _pixPath);
+    QString getPixPath();
 
 protected:
     QLabel label;

@@ -38,7 +38,13 @@ void Entity::operator=(const Entity &_e)
 
 void Entity::setPixPath(QString _pixPath)
 {
+    pixPath = _pixPath;
     QPixmap pix(_pixPath);
     label.clear();
     label.setPixmap(pix);
+}
+
+QString Entity::getPixPath()
+{
+    return pixPath;
 }

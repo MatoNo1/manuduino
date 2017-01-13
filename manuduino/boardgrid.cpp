@@ -41,7 +41,9 @@ BoardGrid::BoardGrid(QWidget* parent):
     thisLayout.addWidget(&tempDR, 2, 2);
     setLayout(&thisLayout);
 
-    centralIsSelector = 0;
+    centralState = NO_CENTRAL_ENTITY;
+    for (int i=0; i<CENTRAL_ENTITY_ARG_CNT; ++i)
+        centralArg[i] = 0;
     UDState = NO_UD;
     LRState = NO_LR;
 }
@@ -60,11 +62,11 @@ BoardGrid::~BoardGrid()
     thisLayout.~QGridLayout();
 }
 
-void BoardGrid::setCentralEntity(Entity* _centralEntity, bool isSelector)
+void BoardGrid::setCentralEntity(Entity* _centralEntity, centralEntityType type)
 {
-    centralEntity = _centralEntity;
-    centralIsSelector = isSelector;
-    if (isSelector) {
+    centralEntity = *_centralEntity;
+    centralState = type;
+    if (type == SELECTOR) {
         arrowUp.setPixPath("://EmptyBoard_U.jpeg");
         arrowRight.setPixPath("://EmptyBoard_R.jpeg");
         arrowDown.setPixPath("://EmptyBoard_D.jpeg");
@@ -74,9 +76,15 @@ void BoardGrid::setCentralEntity(Entity* _centralEntity, bool isSelector)
     }
 }
 
+void BoardGrid::setCentralArg(int idx, int argVal)
+{
+    if (idx >= 0 && idx < CENTRAL_ENTITY_ARG_CNT)
+        centralArg[idx] = argVal;
+}
+
 void BoardGrid::addArrowUp()
 {
-    if (!centralIsSelector) {
+    if (centralState != SELECTOR) {
         arrowUp.setPixPath("://Arrow_Up.jpeg");
         if (UDState == IS_DOWN)
             arrowDown.setPixPath("://EmptyBoard_D.jpeg");
@@ -86,7 +94,7 @@ void BoardGrid::addArrowUp()
 
 void BoardGrid::addArrowRight()
 {
-    if (!centralIsSelector) {
+    if (centralState != SELECTOR) {
         arrowRight.setPixPath("://Arrow_Right.jpeg");
         if (LRState == IS_LEFT)
             arrowLeft.setPixPath("://EmptyBoard_L.jpeg");
@@ -96,7 +104,7 @@ void BoardGrid::addArrowRight()
 
 void BoardGrid::addArrowDown()
 {
-    if (!centralIsSelector) {
+    if (centralState != SELECTOR) {
         arrowDown.setPixPath("://Arrow_Down.jpeg");
         if (UDState == IS_UP)
             arrowUp.setPixPath("://EmptyBoard_U.jpeg");
@@ -106,7 +114,7 @@ void BoardGrid::addArrowDown()
 
 void BoardGrid::addArrowLeft()
 {
-    if (!centralIsSelector) {
+    if (centralState != SELECTOR) {
         arrowLeft.setPixPath("://Arrow_Left.jpeg");
         if (LRState == IS_RIGHT)
             arrowRight.setPixPath("://EmptyBoard_R.jpeg");
@@ -122,7 +130,32 @@ void BoardGrid::allClear()
     arrowLeft.setPixPath("://EmptyBoard_L.jpeg");
     centralEntity.setPixPath("://EmptyBoard_Central.jpeg");
 
-    centralIsSelector = 0;
+    centralState = NO_CENTRAL_ENTITY;
+    for (int i=0; i<CENTRAL_ENTITY_ARG_CNT; ++i)
+        centralArg[i] = 0;
     UDState = NO_UD;
     LRState = NO_LR;
+}
+
+centralEntityType BoardGrid::getCentralState()
+{
+    return centralState;
+}
+
+arrowUpDownInBoardGrid BoardGrid::getUDState()
+{
+    return UDState;
+}
+
+arrowLeftRightInBoardGrid BoardGrid::getLRState()
+{
+    return LRState;
+}
+
+int BoardGrid::getCentralArg(int idx)
+{
+    if (idx >= 0 && idx < CENTRAL_ENTITY_ARG_CNT)
+        return centralArg[idx];
+    else
+        return 0;
 }
