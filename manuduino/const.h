@@ -12,7 +12,7 @@ const int MAIN_WINDOW_TEXT_MODE_WIDTH = 400;
 const int MAIN_WINDOW_MANU_MODE_HEIGHT = 780;
 const int MAIN_WINDOW_MANU_MODE_WIDTH = 1040;
 
-const int MAIN_WINDOW_OPERATION_MENU_MARGIN = 220;
+const int MAIN_WINDOW_OPERATION_MENU_MARGIN = 200;
 const int MAIN_WINDOW_OPERATION_MENU_SPACING = 100;
 
 const int TEXT_EDITOR_ROW = 4;
@@ -69,6 +69,8 @@ const int BIT_SETTER_DIALOG_HEIGHT = 450;
 const int BIT_SETTER_DIALOG_WIDTH = 300;
 const int OUTPUT_DIALOG_HEIGHT = 300;
 const int OUTPUT_DIALOG_WIDTH = 400;
+const int SHELL_DIALOG_HEIGHT = 550;
+const int SHELL_DIALOG_WIDTH = 650;
 
 const int SELECTOR_DIRECT_CNT = 4;
 const int BOOL_CONTROLLER_TYPE_CNT = 3;
@@ -90,6 +92,7 @@ typedef enum {
     OP_COMPARATOR,
     OP_BIT_SETTER,
     OP_OUTPUT,
+    OP_SHELL,
     OP_CLEAR
 } operationType;
 
@@ -100,7 +103,8 @@ typedef enum {
     INT_CONTROLLER,
     COMPARATOR,
     BIT_SETTER,
-    OUTPUT
+    OUTPUT,
+    SHELL
 } centralEntityType;
 
 const Pos COMPILER_START_POS = Pos(0, MANU_BOARD_COL + 1 >> 1);

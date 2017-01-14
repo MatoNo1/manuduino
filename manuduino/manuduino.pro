@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     comparatordialog.cpp \
     outputdialog.cpp \
     bitsetterdialog.cpp \
-    compiler.cpp
+    compiler.cpp \
+    shelldialog.cpp
 
 HEADERS  += mainwindow.h \
     base.h \
@@ -51,7 +52,8 @@ HEADERS  += mainwindow.h \
     comparatordialog.h \
     outputdialog.h \
     bitsetterdialog.h \
-    compiler.h
+    compiler.h \
+    shelldialog.h
 
 FORMS    += mainwindow.ui \
     ServerConfigurationDialog.ui

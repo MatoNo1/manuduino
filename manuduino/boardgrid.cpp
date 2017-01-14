@@ -1,4 +1,5 @@
 #include "boardgrid.h"
+#include "shelldialog.h"
 
 BoardGrid::BoardGrid(QWidget* parent):
     QWidget(parent)
@@ -46,6 +47,7 @@ BoardGrid::BoardGrid(QWidget* parent):
         centralArg[i] = 0;
     UDState = NO_UD;
     LRState = NO_LR;
+    userDefinedCode = "";
 }
 
 BoardGrid::~BoardGrid()
@@ -60,6 +62,15 @@ BoardGrid::~BoardGrid()
     arrowLeft.~Arrow();
     centralEntity.~Entity();
     thisLayout.~QGridLayout();
+}
+
+void BoardGrid::mouseDoubleClickEvent(QMouseEvent *ev)
+{
+    if (ev->button() == Qt::LeftButton && centralState == SHELL) {
+        ShellDialog *dialog = new ShellDialog(this, userDefinedCode);
+        if (dialog->getConfirmed())
+            userDefinedCode = dialog->getCode();
+    }
 }
 
 void BoardGrid::setCentralEntity(Entity* _centralEntity, centralEntityType type)
@@ -158,4 +169,12 @@ int BoardGrid::getCentralArg(int idx)
         return centralArg[idx];
     else
         return 0;
+}
+
+QString BoardGrid::getUserDefinedCode()
+{
+    if (centralState == SHELL)
+        return userDefinedCode;
+    else
+        return "";
 }

@@ -48,6 +48,7 @@ private:
     OperationEntity *comparatorOperation;
     OperationEntity *bitSetterOperation;
     OperationEntity *outputOperation;
+    OperationEntity *shellOperation;
     OperationEntity *clearOperation;
 
     QVBoxLayout mainLayout, operationAndBoardLayout;

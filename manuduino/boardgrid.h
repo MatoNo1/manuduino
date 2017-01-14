@@ -2,6 +2,8 @@
 #define BOARDGRID_H
 
 #include <QWidget>
+#include <QString>
+#include <QMouseEvent>
 #include <QGridLayout>
 #include "arrow.h"
 #include "emptyentity.h"
@@ -23,6 +25,10 @@ public:
     arrowUpDownInBoardGrid getUDState();
     arrowLeftRightInBoardGrid getLRState();
     int getCentralArg(int idx);
+    QString getUserDefinedCode();
+
+protected:
+    void mouseDoubleClickEvent(QMouseEvent* ev);
 
 protected:
     static const int HEIGHT = BOARD_GRID_HEIGHT;
@@ -42,6 +48,8 @@ protected:
     int centralArg[CENTRAL_ENTITY_ARG_CNT];
     arrowUpDownInBoardGrid UDState;
     arrowLeftRightInBoardGrid LRState;
+
+    QString userDefinedCode;
 };
 
 #endif // BOARDGRID_H

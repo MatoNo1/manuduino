@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     comparatorOperation = new OperationEntity(this, OP_COMPARATOR, "://Comparator/000.jpeg");
     bitSetterOperation = new OperationEntity(this, OP_BIT_SETTER, "://BitSetter/000.jpeg");
     outputOperation = new OperationEntity(this, OP_OUTPUT, "://Output/00.jpeg");
+    shellOperation = new OperationEntity(this, OP_SHELL, "://Shell.jpeg");
     clearOperation = new OperationEntity(this, OP_CLEAR, "://Clear.jpeg");
 
     arrowUpOperation->setToolTip("Arrow Up");
@@ -52,6 +53,7 @@ MainWindow::MainWindow(QWidget *parent) :
     comparatorOperation->setToolTip("Comparator");
     bitSetterOperation->setToolTip("Bit Setter");
     outputOperation->setToolTip("Output");
+    shellOperation->setToolTip("Code Shell");
     clearOperation->setToolTip("Clear Grid");
 
     connect(arrowUpOperation, SIGNAL(activate(operationType)), this, SLOT(activateHandler(operationType)));
@@ -64,6 +66,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(comparatorOperation, SIGNAL(activate(operationType)), this, SLOT(activateHandler(operationType)));
     connect(bitSetterOperation, SIGNAL(activate(operationType)), this, SLOT(activateHandler(operationType)));
     connect(outputOperation, SIGNAL(activate(operationType)), this, SLOT(activateHandler(operationType)));
+    connect(shellOperation, SIGNAL(activate(operationType)), this, SLOT(activateHandler(operationType)));
     connect(clearOperation, SIGNAL(activate(operationType)), this, SLOT(activateHandler(operationType)));
 
     operationLayout.addSpacing(MAIN_WINDOW_OPERATION_MENU_MARGIN);
@@ -79,6 +82,7 @@ MainWindow::MainWindow(QWidget *parent) :
     operationLayout.addWidget(comparatorOperation);
     operationLayout.addWidget(bitSetterOperation);
     operationLayout.addWidget(outputOperation);
+    operationLayout.addWidget(shellOperation);
     operationLayout.addWidget(clearOperation);
     operationLayout.addSpacing(MAIN_WINDOW_OPERATION_MENU_MARGIN);
 
@@ -218,6 +222,13 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *ev)
                         grid[targetGridRow][targetGridCol]->setCentralArg(i, outputOperation->getArg(i));
                     break;
                 }
+                case OP_SHELL: {
+                    centralEntity = Entity(grid[targetGridRow][targetGridCol], shellOperation->getPixPath());
+                    grid[targetGridRow][targetGridCol]->setCentralEntity(&centralEntity, SHELL);
+                    for (int i=0; i<CENTRAL_ENTITY_ARG_CNT; ++i)
+                        grid[targetGridRow][targetGridCol]->setCentralArg(i, 0);
+                    break;
+                }
                 case OP_CLEAR: {
                     grid[targetGridRow][targetGridCol]->allClear();
                     break;
@@ -275,6 +286,10 @@ void MainWindow::mouseMoveEvent(QMouseEvent *ev)
             }
             case OP_OUTPUT: {
                 cursor = QCursor(QPixmap(outputOperation->getPixPath()));
+                break;
+            }
+            case OP_SHELL: {
+                cursor = QCursor(QPixmap(shellOperation->getPixPath()));
                 break;
             }
             case OP_CLEAR: {
