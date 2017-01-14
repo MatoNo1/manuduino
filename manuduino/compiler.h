@@ -14,11 +14,15 @@ protected:
     Pos startPos;
     direct startDir;
 
+protected:
+    void compileCell(QTextStream &outputStream, int r, int c);
+
 public:
     Compiler(BoardGrid* allGrid[][COL], Pos _startPos, direct _startDir);
     ~Compiler();
     void compile(QTextStream &outputStream);
     void compileText(QTextStream &outputStream, const QString& text);
+    void compileManufacture(QTextStream &outputStream);
 };
 
 #endif // COMPILER_H
