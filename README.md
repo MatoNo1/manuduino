@@ -1,1 +1,1 @@
-# manuduino
+# manuduino## 2016年秋季学期《嵌入式系统》&&《人机交互理论与技术》课程综合大作业By MatoNo1 && tansinan## 详细说明见report/report.pdf
